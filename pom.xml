@@ -23,9 +23,9 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <libDirectory>${basedir}/src/main/java/de/timoh/logicparser/grammar/imports</libDirectory>
-                    <sourceDirectory>${basedir}/src/main/java/de/timoh/logicparser/grammar</sourceDirectory>
-                    <outputDirectory>${basedir}/src/main/java/de/timoh/logicparser/parser</outputDirectory>
+                    <libDirectory>${basedir}/src/main/java/de/timoh/logicinterpreter/grammar/imports</libDirectory>
+                    <sourceDirectory>${basedir}/src/main/java/de/timoh/logicinterpreter/grammar</sourceDirectory>
+                    <outputDirectory>${basedir}/src/main/java/de/timoh/logicinterpreter/parser/generated</outputDirectory>
                 </configuration>
             </plugin>
             <plugin>

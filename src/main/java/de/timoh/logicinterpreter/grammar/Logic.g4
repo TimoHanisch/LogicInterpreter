@@ -1,7 +1,7 @@
 grammar Logic;
 
 @header {
-package de.timoh.logicparser.parser;
+package de.timoh.logicinterpreter.parser.generated;
 }
 
 parse
@@ -10,10 +10,11 @@ parse
 
 logic_stmt
     : LEFT_PARREN logic_stmt RIGHT_PARREN
+    | Identifier
     | NOT logic_stmt
     | logic_stmt AND logic_stmt
     | logic_stmt OR logic_stmt
-    | Identifier
+    | TRUE | FALSE
     ;
 
 LEFT_PARREN : '(';
@@ -22,6 +23,8 @@ RIGHT_PARREN : ')';
 NOT : 'NOT';
 AND : 'AND';
 OR  : 'OR';
+TRUE : 'TRUE';
+FALSE : 'FALSE';
 
 
 Identifier

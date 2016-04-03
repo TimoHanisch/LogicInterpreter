@@ -1,7 +1,8 @@
-package de.timoh.logicparser.objects;
+package de.timoh.logicinterpreter.objects;
 
 /**
  * Created on 05.03.2016.
+ *
  * @author Timo Hanisch
  */
 public interface Expression {
@@ -10,5 +11,5 @@ public interface Expression {
 
     Expression invert();
 
-    Expression evaluate();
+    Expression substitute(Expression expression, Expression substitute);
 }
