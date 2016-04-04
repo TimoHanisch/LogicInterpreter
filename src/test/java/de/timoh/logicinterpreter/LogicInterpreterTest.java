@@ -1,8 +1,5 @@
 package de.timoh.logicinterpreter;
 
-
-import de.timoh.logicinterpreter.objects.AndExpression;
-import de.timoh.logicinterpreter.objects.IdentifierExpression;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -147,13 +144,13 @@ public class LogicInterpreterTest {
     @Test
     public void simpleInputTest13() {
         String input = "NOT (a AND b)";
-        String expected = "(NOT a OR NOT b)";
+        String expected = "NOT a OR NOT b";
         LogicInterpreter logicInterpreter = new LogicInterpreter();
         String output = logicInterpreter.evaluateString(input);
         Assert.assertEquals(expected, output);
 
         input = "NOT (a OR b)";
-        expected = "(NOT a AND NOT b)";
+        expected = "NOT a AND NOT b";
         output = logicInterpreter.evaluateString(input);
         Assert.assertEquals(expected, output);
     }
@@ -161,7 +158,7 @@ public class LogicInterpreterTest {
     @Test
     public void difficultTest1() {
         String input = "NOT (A OR B) AND NOT (C OR D OR E) OR NOT (A OR B)";
-        String expected = "(NOT A AND NOT B)";
+        String expected = "NOT A AND NOT B";
         LogicInterpreter logicInterpreter = new LogicInterpreter();
         String output = logicInterpreter.evaluateString(input);
         Assert.assertEquals(expected, output);
@@ -170,7 +167,7 @@ public class LogicInterpreterTest {
     @Test
     public void difficultTest2() {
         String input = "NOT(NOT(a OR b)OR NOT (NOT (a AND b)))";
-        String expected = "((a OR b) AND (NOT a OR NOT b))";
+        String expected = "(a OR b) AND (NOT a OR NOT b)";
         LogicInterpreter logicInterpreter = new LogicInterpreter();
         String output = logicInterpreter.evaluateString(input);
         Assert.assertEquals(input, expected, output);
@@ -181,7 +178,25 @@ public class LogicInterpreterTest {
         String input = "A AND B OR A AND B AND C OR A AND B AND C AND D OR A AND B AND C AND D AND E OR A AND B AND C AND D AND E AND F";
         String expected = "A AND B";
         LogicInterpreter logicInterpreter = new LogicInterpreter();
-        String output = logicInterpreter.substitute(input, new AndExpression(new IdentifierExpression("A"), new IdentifierExpression("B")), new IdentifierExpression("X"));
+        String output = logicInterpreter.evaluateString(input);
+        Assert.assertEquals(input, expected, output);
+    }
+
+    @Test
+    public void difficultTest4() {
+        String input = "A AND C OR NOT A AND NOT B AND C";
+        String expected = "A AND B";
+        LogicInterpreter logicInterpreter = new LogicInterpreter();
+        String output = logicInterpreter.evaluateString(input);
+        Assert.assertEquals(input, expected, output);
+    }
+
+    @Test
+    public void difficultTest5() {
+        String input = "NOT A AND NOT B OR NOT A AND B AND NOT C OR NOT (A OR NOT C)";
+        String expected = "A AND B";
+        LogicInterpreter logicInterpreter = new LogicInterpreter();
+        String output = logicInterpreter.evaluateString(input);
         Assert.assertEquals(input, expected, output);
     }
 }

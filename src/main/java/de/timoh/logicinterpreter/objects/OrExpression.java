@@ -27,9 +27,9 @@ public class OrExpression extends BinaryExpression {
             return BooleanConstants.TRUE;
         } else if (rightReduced.equals(new NotExpression(leftReduced))) {
             return BooleanConstants.TRUE;
-        } else if (leftReduced instanceof AndExpression && (rightReduced.equals(((AndExpression) leftReduced).getLeftExpression()) || rightReduced.equals(((AndExpression) leftReduced).getRightExpression()))) {
+        } else if (leftReduced instanceof AndExpression && ((AndExpression) leftReduced).contains(rightReduced)) {
             return rightReduced;
-        } else if (rightReduced instanceof AndExpression && (leftReduced.equals(((AndExpression) rightReduced).getLeftExpression()) || leftReduced.equals(((AndExpression) rightReduced).getRightExpression()))) {
+        } else if (rightReduced instanceof AndExpression && ((AndExpression) rightReduced).contains(leftReduced)) {
             return leftReduced;
         } else if (leftReduced instanceof AndExpression && ((AndExpression) leftReduced).getLeftExpression().equals(new NotExpression(rightReduced))) {
             return new OrExpression(((AndExpression) leftReduced).getRightExpression(), rightReduced, isEncapsulated());
@@ -54,6 +54,11 @@ public class OrExpression extends BinaryExpression {
             return substitute;
         }
         return new OrExpression(getLeftExpression().substitute(expression, substitute), getRightExpression().substitute(expression, substitute), isEncapsulated());
+    }
+
+    @Override
+    public String getPrettyString() {
+        return String.format("%s OR %s", getLeftExpression().toString(), getRightExpression().toString());
     }
 
     @Override

@@ -41,6 +41,6 @@ public class LogicInterpreter {
     }
 
     private String evaluate(Expression evaluatorExpression) {
-        return evaluatorExpression.reduce().toString();
+        return evaluatorExpression.reduce().getPrettyString();
     }
 }

@@ -62,6 +62,26 @@ public class AndExpression extends BinaryExpression {
         return new AndExpression(getLeftExpression().substitute(expression, substitute), getRightExpression().substitute(expression, substitute), isEncapsulated());
     }
 
+    // Check and chains
+    boolean contains(Expression expression) {
+        if (getLeftExpression().equals(expression) || getRightExpression().equals(expression)) {
+            return true;
+        } else if (!(getLeftExpression() instanceof AndExpression) && !(getRightExpression() instanceof AndExpression)) {
+            return false;
+        }
+        if (getLeftExpression() instanceof AndExpression && !((AndExpression) getLeftExpression()).isEncapsulated()) {
+            return ((AndExpression) getLeftExpression()).contains(expression);
+        } else if (getRightExpression() instanceof AndExpression && !((AndExpression) getRightExpression()).isEncapsulated()) {
+            return ((AndExpression) getRightExpression()).contains(expression);
+        }
+        return false;
+    }
+
+    @Override
+    public String getPrettyString() {
+        return String.format("%s AND %s", getLeftExpression().toString(), getRightExpression().toString());
+    }
+
     @Override
     public String toString() {
         return String.format(isEncapsulated() ? "(%s AND %s)" : "%s AND %s", getLeftExpression().toString(), getRightExpression().toString());

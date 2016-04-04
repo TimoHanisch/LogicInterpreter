@@ -32,6 +32,11 @@ public class IdentifierExpression implements Expression {
     }
 
     @Override
+    public String getPrettyString() {
+        return toString();
+    }
+
+    @Override
     public String toString() {
         return value;
     }

@@ -32,10 +32,15 @@ public class BooleanConstants {
 
         @Override
         public Expression substitute(Expression expression, Expression substitute) {
-            if(this.equals(expression)) {
+            if (this.equals(expression)) {
                 return substitute;
             }
             return this;
+        }
+
+        @Override
+        public String getPrettyString() {
+            return toString();
         }
 
         @Override
@@ -66,10 +71,15 @@ public class BooleanConstants {
 
         @Override
         public Expression substitute(Expression expression, Expression substitute) {
-            if(this.equals(expression)) {
+            if (this.equals(expression)) {
                 return substitute;
             }
             return this;
+        }
+
+        @Override
+        public String getPrettyString() {
+            return toString();
         }
 
         @Override

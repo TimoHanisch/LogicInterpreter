@@ -12,4 +12,6 @@ public interface Expression {
     Expression invert();
 
     Expression substitute(Expression expression, Expression substitute);
+
+    String getPrettyString();
 }

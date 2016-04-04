@@ -30,6 +30,11 @@ public class NotExpression extends UnaryExpression {
     }
 
     @Override
+    public String getPrettyString() {
+        return toString();
+    }
+
+    @Override
     public String toString() {
         return String.format("NOT %s", getExpression().toString());
     }
